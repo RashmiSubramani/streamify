@@ -68,3 +68,27 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Redux store installation :
+npm i @reduxjs/toolkit
+npm i react-redux
+
+Add store.js and slices and then
+<Provider store={store}></Provider>
+
+React router dom - npm i react-router-dom
+
+Cache:
+time complexity to search in array = O(n)
+time complexity to search in Object = O(1)
+
+[i, ip, iph, iphone]
+
+{
+i:
+ip:
+iph:
+iphone:
+}
+
+new Map();
