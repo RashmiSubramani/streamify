@@ -1,36 +1,33 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { YOUTUBE_COMMENTS_API } from "../../../../utils/constants";
 import CommentList from "./CommentList";
 
-export default function CommentsContainer() {
-  const commentsData = [
-    {
-      name: "Rashmi",
-      text: "Lorem ipsum",
-      replies: [],
-    },
-    {
-      name: "Aasha",
-      text: "Lorem ipsum",
-      replies: [
-        { name: "Pradeep", text: "Hey there", replies: [] },
-        { name: "Aarav", text: "hello there", replies: [] },
-      ],
-    },
-    {
-      name: "Michael",
-      text: "Lorem ipsum",
-      replies: [
-        {
-          name: "Nova",
-          text: "I am Nova",
-          replies: [{ name: "Elora", text: "hello there", replies: [] }],
-        },
-      ],
-    },
-  ];
+export default function YouTubeCommentsContainer() {
+  const [searchParams] = useSearchParams();
+  const videoId = searchParams.get("v");
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    if (videoId) getComments();
+  }, [videoId]);
+
+  async function getComments() {
+    try {
+      const data = await fetch(`${YOUTUBE_COMMENTS_API}&videoId=${videoId}`);
+      const json = await data.json();
+      setComments(json.items || []);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  }
+
   return (
-    <div className="text-white m-5 p-2">
-      <h1>Comments</h1>
-      <CommentList data={commentsData} />
+    <div className="text-white mt-6 px-4">
+      <h2 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">
+        Comments ({comments?.length || 0})
+      </h2>
+      <CommentList data={comments} />
     </div>
   );
 }
