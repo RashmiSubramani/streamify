@@ -2,16 +2,21 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const searchSlice = createSlice({
   name: "search",
-  initialState: {},
+  initialState: {
+    videos: [],
+  },
   reducers: {
     cacheResults: (state, action) => {
-      //   state = { ...action.payload, ...state };
       state = Object.assign(state, action.payload);
+    },
+    setVideos: (state, action) => {
+      state.videos = action.payload;
+    },
+    clearVideos: (state) => {
+      state.videos = [];
     },
   },
 });
 
-export const { cacheResults } = searchSlice.actions;
+export const { cacheResults, setVideos, clearVideos } = searchSlice.actions;
 export default searchSlice.reducer;
-
-//LRU Cache

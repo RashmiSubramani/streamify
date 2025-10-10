@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../../utils/constants";
 import { FaSearch } from "react-icons/fa";
 import { cacheResults } from "../../utils/searchSlice";
+import { useNavigate } from "react-router-dom";
+import Logo from "../../images/streamify.png";
 
 export function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -27,7 +30,6 @@ export function Header() {
       } else {
         debounceSearch();
       }
-      //   debounceSearch();
     }, 200);
 
     return () => {
@@ -55,13 +57,12 @@ export function Header() {
   //If I press searchTerm as "ip" in search text AFTER 200ms,
   //    - it will automatically make an API call
 
-  async function debounceSearch(term) {
-    console.log("API CALL", searchTerm);
+  async function debounceSearch() {
+    if (!searchTerm.trim()) return;
     const data = await fetch(`${YOUTUBE_SEARCH_API}${searchTerm}`);
     const json = await data.json();
-    console.log("SEARCH", json[1]);
     setSuggestions(json[1]);
-    dispatch(cacheResults({ [term]: json[1] }));
+    dispatch(cacheResults({ [searchTerm]: json[1] }));
   }
 
   function onToggleMenu() {
@@ -69,18 +70,14 @@ export function Header() {
   }
 
   return (
-    <div className="grid grid-flow-col p-2 m-2 shadow-red-500 shadow-lg ">
+    <div className="grid grid-flow-col items-center p-2 m-2 shadow-red-500 shadow-lg ">
       <div className="flex items-center  col-span-1 gap-2">
         <img
-          src="https://png.pngtree.com/png-clipart/20230924/original/pngtree-hamburger-like-menu-black-glyph-ui-icon-icon-concept-settings-vector-png-image_12749016.png"
-          alt="hamburger"
-          className="h-8 rounded-lg cursor-pointer"
-          onClick={onToggleMenu}
-        />
-        <img
-          src="https://animationvisarts.com/wp-content/uploads/2023/09/Color-YouTube-logo-1030x571.jpg"
+          // src="https://animationvisarts.com/wp-content/uploads/2023/09/Color-YouTube-logo-1030x571.jpg"
+          src={Logo}
           alt="logo"
-          className="h-12"
+          className="h-12 cursor-pointer"
+          onClick={() => navigate("/")}
         />
       </div>
       <div className="col-span-10 text-center  text-white">
@@ -95,11 +92,18 @@ export function Header() {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
-            className="p-2 rounded-l-3xl w-full border-gray-400 border-2 bg-black"
+            className="flex-1 p-2 px-4 rounded-l-3xl border-2 border-gray-400 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
           />
 
           {/* Button */}
-          <button className="text-white rounded-r-3xl border-l-0 border-gray-400 border-2 p-2">
+          <button
+            className="p-2 px-4 rounded-r-3xl border-2 border-l-0 border-gray-400 bg-black text-white flex items-center justify-center focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
+            onClick={() => {
+              if (searchTerm.trim() !== "") {
+                navigate(`/results?search_query=${searchTerm}`);
+              }
+            }}
+          >
             <FaSearch className="text-gray-300" />
           </button>
 
@@ -113,7 +117,7 @@ export function Header() {
                   onMouseDown={() => {
                     setSearchTerm(item); // Set input to clicked suggestion
                     setShowSuggestions(false);
-                    debounceSearch(item); // Trigger search for the clicked suggestion
+                    navigate(`/results?search_query=${item}`);
                   }}
                 >
                   <FaSearch className="text-gray-400" />
