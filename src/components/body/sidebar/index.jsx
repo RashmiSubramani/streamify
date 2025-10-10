@@ -92,22 +92,12 @@ export function SideBar() {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="text-white  h-screen overflow-y-auto sticky top-0 shadow-lg">
+    <div className="text-white  h-screen overflow-y-auto sticky top-0 shadow-lg my-2">
       {SIDEBAR_SECTIONS.map((section, idx) => (
         <div key={idx} className="px-4 py-3">
           {section.title && (
             <h2 className="font-bold mb-2 text-sm">{section.title}</h2>
           )}
-          {/* <ul className="space-y-2">
-            {section.items.map((item, i) => (
-              <li
-                key={i}
-                className="cursor-pointer px-2 py-1 rounded hover:bg-gray-800  transition-colors"
-              >
-                {item}
-              </li>
-            ))}
-          </ul> */}
           <ul className="space-y-2">
             {section.items.map((item, i) => (
               <li
