@@ -1,12 +1,14 @@
+import { useState } from "react";
 import { ButtonList } from "./buttons/ButtonList";
 import { VideoContainer } from "./videos/VideoContainer";
 
 export function MainContainer() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   return (
-    // <div className="col-span-11">
-    <div className="overflow-y-auto h-screen ">
-      <ButtonList />
-      <VideoContainer />
+    <div>
+      <ButtonList onCategorySelect={setSelectedCategory} />
+      <VideoContainer selectedCategory={selectedCategory} />
     </div>
   );
 }
