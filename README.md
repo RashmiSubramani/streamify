@@ -1,94 +1,231 @@
-# Getting Started with Create React App
+# 🎬 Streamify - Modern YouTube Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A feature-rich YouTube clone built with React, Redux Toolkit, and YouTube Data API v3, offering a seamless video streaming experience with modern UI/UX design.
 
-## Available Scripts
+![Streamify Banner](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+### 🎥 **Core Video Experience**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Video Streaming**: Full YouTube video player with autoplay support
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Category Filtering**: Browse videos by categories with dynamic button list
+- **Infinite Scroll**: Seamless loading of more content as you scroll
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🔍 **Advanced Search**
 
-### `npm test`
+- **Smart Search**: Real-time search with debounced API calls (200ms delay)
+- **Search Suggestions**: Intelligent autocomplete with caching mechanism
+- **Search Results**: Dedicated page for search results with pagination
+- **Search Cache**: Object-based caching for O(1) lookup performance
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎨 **Modern UI/UX**
 
-### `npm run build`
+- **Dark/Light Theme**: Toggle between themes with system preference detection
+- **Responsive Layout**: Mobile-first design with Tailwind CSS
+- **Smooth Animations**: Hover effects and transitions throughout
+- **Clean Interface**: YouTube-inspired design with modern touches
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 💬 **Interactive Features**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Comments System**: Full comment threads with nested replies
+- **Live Chat**: Real-time chat for live streams with auto-refresh
+- **Like System**: Video engagement with like counts display
+- **User Profiles**: Channel information and subscriber counts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🚀 **Performance Optimizations**
 
-### `npm run eject`
+- **Code Splitting**: Optimized bundle sizes with React Router
+- **Lazy Loading**: Components loaded on demand
+- **Memoization**: Cached API responses for repeated requests
+- **Debounced Search**: Prevents excessive API calls
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🛠️ Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Technology              | Purpose             | Version |
+| ----------------------- | ------------------- | ------- |
+| **React**               | Frontend Framework  | ^19.1.1 |
+| **Redux Toolkit**       | State Management    | ^2.9.0  |
+| **React Router**        | Client-side Routing | ^7.9.3  |
+| **Tailwind CSS**        | Styling Framework   | ^3.3.3  |
+| **React Icons**         | Icon Library        | ^5.5.0  |
+| **FontAwesome**         | Additional Icons    | ^7.0.1  |
+| **YouTube Data API v3** | Video Data Source   | Latest  |
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🏗️ Project Architecture
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+streamify/
+├── public/                 # Static assets
+├── src/
+│   ├── components/         # Reusable UI components
+│   │   ├── header/        # Navigation and search
+│   │   └── body/          # Main content areas
+│   │       ├── sidebar/   # Navigation sidebar
+│   │       ├── mainContainer/ # Home page content
+│   │       └── watch/     # Video player page
+│   ├── contexts/          # React Context providers
+│   │   └── ThemeContext.jsx # Theme management
+│   ├── utils/             # Utilities and Redux store
+│   │   ├── store.js       # Redux store configuration
+│   │   ├── appSlice.js    # App state management
+│   │   ├── searchSlice.js # Search functionality
+│   │   ├── chatSlice.js   # Live chat state
+│   │   └── constants.js   # API endpoints and keys
+│   └── images/            # Local image assets
+└── README.md
+```
 
-## Learn More
+## 🚀 Quick Start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Node.js (v14 or higher)
+- npm or yarn
+- YouTube Data API v3 key
 
-### Code Splitting
+### Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Clone the repository**
 
-### Analyzing the Bundle Size
+   ```bash
+   git clone https://github.com/yourusername/streamify.git
+   cd streamify
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Install dependencies**
 
-### Making a Progressive Web App
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. **Configure API Key**
 
-### Advanced Configuration
+   - Get your YouTube Data API v3 key from [Google Cloud Console](https://console.cloud.google.com/)
+   - Update `src/utils/constants.js` with your API key:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```javascript
+   export const GOOGLE_API_KEY = "your_api_key_here";
+   ```
 
-### Deployment
+4. **Start the development server**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   ```bash
+   npm start
+   ```
 
-### `npm run build` fails to minify
+5. **Open your browser**
+   - Navigate to `http://localhost:3000`
+   - Start exploring Streamify!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎯 Key Components
 
-Redux store installation :
-npm i @reduxjs/toolkit
-npm i react-redux
+### 🎬 Video Player (`/watch`)
 
-Add store.js and slices and then
-<Provider store={store}></Provider>
+- Full-screen YouTube embed player with autoplay
+- Video metadata display (title, views, likes, description)
+- Related videos with infinite scroll functionality
+- Live chat integration for live streams
+- Comment system with threaded replies
 
-React router dom - npm i react-router-dom
+### 🏠 Home Page (`/`)
 
-Cache:
-time complexity to search in array = O(n)
-time complexity to search in Object = O(1)
+- Category-based video filtering with button list
+- Trending and popular videos from YouTube API
+- Responsive video grid layout
+- Smooth infinite scroll loading
 
-[i, ip, iph, iphone]
+### 🔍 Search Results (`/results`)
 
-{
-i:
-ip:
-iph:
-iphone:
-}
+- Real-time search functionality with debouncing
+- Search suggestions with intelligent caching
+- Paginated results display
+- Fast O(1) cache lookup performance
 
-new Map();
+### 🎨 Theme System
+
+- Automatic dark/light mode detection
+- Manual theme toggle with smooth transitions
+- Persistent theme preference storage
+- System preference integration
+
+## 🔧 Available Scripts
+
+| Command         | Description                                |
+| --------------- | ------------------------------------------ |
+| `npm start`     | Start development server on localhost:3000 |
+| `npm run build` | Build optimized production bundle          |
+| `npm test`      | Run test suite in interactive mode         |
+| `npm run eject` | Eject from Create React App (irreversible) |
+
+## 🌟 Advanced Features
+
+### 📊 State Management
+
+- **Redux Toolkit** for efficient state management
+- **Modular slices** for different app features:
+  - `appSlice`: UI state (sidebar, menu toggle)
+  - `searchSlice`: Search cache and results with O(1) lookup
+  - `chatSlice`: Live chat messages and real-time updates
+
+### 🎭 Context API Integration
+
+- **ThemeContext**: Global theme management
+- **Local Storage Integration**: Persistent user preferences
+- **System Preference Detection**: Auto dark/light mode
+
+### 🔄 API Integration
+
+- **YouTube Data API v3** for all video data
+- **Error handling** for API failures and rate limits
+- **Debounced requests** to prevent excessive API calls
+- **Smart caching** for improved performance
+
+## 🎨 Performance Optimizations
+
+### 🚀 Search Performance
+
+```javascript
+// Cache Implementation: O(1) lookup time
+const searchCache = {
+  react: ["react tutorial", "react hooks", "react 2024"],
+  javascript: ["javascript basics", "js projects", "node.js"],
+};
+// Array search: O(n) → Object search: O(1)
+```
+
+### ⚡ Debounced Search
+
+- 200ms delay prevents excessive API calls
+- Cancels previous requests when user types quickly
+- Utilizes cached results for repeated searches
+
+### 🔄 Infinite Scroll
+
+- Intersection Observer API for efficient scroll detection
+- Lazy loading of components and content
+- Optimized video grid rendering
+
+### 📋 Development Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Install Redux Toolkit and React Redux
+npm i @reduxjs/toolkit react-redux
+
+# Install React Router
+npm i react-router-dom
+
+# Start development server
+npm start
+```
+
+---
+
+</div>
