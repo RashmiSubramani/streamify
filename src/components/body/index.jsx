@@ -21,7 +21,7 @@ export function Body() {
 
   return (
     <div
-      className={`h-screen ${
+      className={`h-screen bg-white dark:bg-black transition-colors duration-200 ${
         isWatchPage
           ? "grid grid-cols-1" // full width for watch page
           : isMenuOpen

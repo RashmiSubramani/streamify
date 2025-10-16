@@ -25,7 +25,7 @@ export function ButtonList({ onCategorySelect }) {
   }
 
   return (
-    <div className="flex overflow-x-auto scrollbar-hide space-x-2 p-2 bg-black">
+    <div className="flex overflow-x-auto scrollbar-hide space-x-2 p-2 bg-white dark:bg-black transition-colors duration-200">
       {categories.map((name, index) => (
         <Button
           key={index}

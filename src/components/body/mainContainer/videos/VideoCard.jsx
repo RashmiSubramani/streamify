@@ -16,7 +16,7 @@ export function VideoCard({ info }) {
 
   return (
     <div 
-      className="p-2 w-full shadow-lg shadow-red-500/50 flex flex-col gap-1 rounded-lg h-full cursor-pointer hover:scale-105 transition-transform duration-200"
+      className="p-2 w-full shadow-lg shadow-red-500/50 flex flex-col gap-1 rounded-lg h-full cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white"
       onClick={handleVideoClick}
     >
       <img
@@ -25,8 +25,8 @@ export function VideoCard({ info }) {
         className="rounded-xl w-full"
       />
       <div className="font-bold">{title}</div>
-      <div className="text-sm text-gray-400">{channelTitle}</div>
-      <div className="flex gap-2 text-sm text-gray-400">
+      <div className="text-sm text-gray-600 dark:text-gray-400">{channelTitle}</div>
+      <div className="flex gap-2 text-sm text-gray-600 dark:text-gray-400">
         {viewCount && <span>{formatCount(viewCount)}</span>}
         <span>{formatTime(publishedAt)}</span>
       </div>

@@ -136,7 +136,7 @@ export function VideoContainer({ selectedCategory }) {
   return (
     <div className="w-full">
       {/* Video Grid - Responsive layout with auto-fill columns */}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 p-4 bg-black text-white w-full">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 p-4 bg-white dark:bg-black text-gray-900 dark:text-white w-full transition-colors duration-200">
         {videos.map((video, index) => (
           <Link to={`/watch?v=${video.id}`} key={`${video.id}-${index}`}>
             <VideoCard info={video} />
@@ -146,7 +146,7 @@ export function VideoContainer({ selectedCategory }) {
 
       {/* Loading indicator and infinite scroll trigger */}
       {videos.length > 0 && (
-        <div ref={loaderRef} className="text-center py-8 text-gray-400">
+        <div ref={loaderRef} className="text-center py-8 text-gray-400 dark:text-gray-600">
           {loading ? (
             <div className="flex items-center justify-center gap-2">
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-red-500"></div>
@@ -164,7 +164,7 @@ export function VideoContainer({ selectedCategory }) {
 
       {/* Empty state when no videos are loaded */}
       {videos.length === 0 && !loading && (
-        <div className="text-center py-8 text-gray-400">
+        <div className="text-center py-8 text-gray-400 dark:text-gray-600">
           <p>No videos available for {selectedCategory}</p>
           <button
             onClick={() => getVideos(true)}

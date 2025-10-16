@@ -201,7 +201,7 @@ export default function Watch() {
   } = videoData;
 
   return (
-    <div className="flex flex-col bg-black text-white min-h-screen">
+    <div className="flex flex-col bg-white dark:bg-black text-gray-900 dark:text-white min-h-screen transition-colors duration-200">
       {/* Video Player */}
       <div className="flex justify-center w-full bg-black">
         <div className="w-full max-w-[1200px] aspect-video rounded-xl overflow-hidden">
@@ -232,7 +232,7 @@ export default function Watch() {
                 />
                 <div>
                   <p className="font-medium">{channelDetails.snippet.title}</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-400 dark:text-gray-600 text-sm">
                     {Number(
                       channelDetails.statistics.subscriberCount
                     ).toLocaleString()}{" "}
@@ -242,16 +242,16 @@ export default function Watch() {
               </div>
 
               {/* Like */}
-              <div className="flex items-center gap-2 bg-gray-800 p-2 rounded-lg hover:bg-gray-700 cursor-pointer mt-4 w-fit">
-                <FaThumbsUp className="text-white" />
-                <span className="font-medium">
+              <div className="flex items-center gap-2 bg-gray-200 dark:bg-gray-800 p-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer mt-4 w-fit">
+                <FaThumbsUp className="text-gray-700 dark:text-white" />
+                <span className="font-medium text-gray-700 dark:text-white">
                   {likeCount ? Number(likeCount).toLocaleString() : "0"}
                 </span>
               </div>
             </div>
 
-            <div className=" bg-gray-800 p-4 rounded-lg my-2">
-              <p className="text-gray-400 text-sm ">
+            <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg my-2">
+              <p className="text-gray-600 dark:text-gray-400 text-sm ">
                 {viewCount
                   ? `${Number(viewCount).toLocaleString()} views`
                   : "0 views"}{" "}
@@ -259,7 +259,7 @@ export default function Watch() {
               </p>
 
               {/* Description */}
-              <div className="text-gray-200">
+              <div className="text-gray-700 dark:text-gray-200">
                 <div
                   className={`${
                     showFullDescription ? "" : "line-clamp-4"
@@ -299,7 +299,7 @@ export default function Watch() {
               return (
                 <div 
                   key={`${videoIdValue}-${index}`}
-                  className="cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-900 p-3 rounded-lg"
+                  className="cursor-pointer hover:scale-105 transition-transform duration-200 bg-gray-100 dark:bg-gray-900 p-3 rounded-lg"
                   onClick={() => navigate(`/watch?v=${videoIdValue}`)}
                 >
                   <img
@@ -308,10 +308,10 @@ export default function Watch() {
                     className="w-full rounded-lg"
                   />
                   <p className="font-semibold mt-2 line-clamp-2">{video.snippet.title}</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
                     {video.snippet.channelTitle}
                   </p>
-                  <p className="text-gray-500 text-xs mt-1">
+                  <p className="text-gray-500 dark:text-gray-500 text-xs mt-1">
                     {new Date(video.snippet.publishedAt).toLocaleDateString()}
                   </p>
                 </div>

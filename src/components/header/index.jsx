@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleMenu } from "../../utils/appSlice";
 import { useEffect, useState } from "react";
-import { YOUTUBE_SEARCH_API } from "../../utils/constants";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaSun, FaMoon } from "react-icons/fa";
 import { cacheResults } from "../../utils/searchSlice";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../images/streamify.png";
+import LightLogo from "../../images/lightLogo.png";
+import DarkLogo from "../../images/darkLogo.png";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export function Header() {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     //Make an api call after every key press. But if the difference between 2 keypress is < 200ms, then cancel/decline the previous api call and make a new api call.
@@ -59,28 +60,34 @@ export function Header() {
 
   async function debounceSearch() {
     if (!searchTerm.trim()) return;
-    const data = await fetch(`${YOUTUBE_SEARCH_API}${searchTerm}`);
-    const json = await data.json();
-    setSuggestions(json[1]);
-    dispatch(cacheResults({ [searchTerm]: json[1] }));
-  }
+    // Temporarily disabled due to CORS issues
+    // const data = await fetch(`${YOUTUBE_SEARCH_API}${searchTerm}`);
+    // const json = await data.json();
+    // setSuggestions(json[1]);
+    // dispatch(cacheResults({ [searchTerm]: json[1] }));
 
-  function onToggleMenu() {
-    dispatch(toggleMenu());
+    // Mock suggestions to avoid CORS error
+    const mockSuggestions = [
+      `${searchTerm} tutorial`,
+      `${searchTerm} music`,
+      `${searchTerm} review`,
+      `${searchTerm} 2024`,
+    ];
+    setSuggestions(mockSuggestions);
+    dispatch(cacheResults({ [searchTerm]: mockSuggestions }));
   }
 
   return (
-    <div className="grid grid-flow-col items-center p-2 m-2 shadow-red-500 shadow-lg ">
+    <div className="grid grid-flow-col items-center p-2 m-2 shadow-red-500 shadow-lg bg-black dark:bg-white transition-colors duration-200">
       <div className="flex items-center  col-span-1 gap-2">
         <img
-          // src="https://animationvisarts.com/wp-content/uploads/2023/09/Color-YouTube-logo-1030x571.jpg"
-          src={Logo}
-          alt="logo"
-          className="h-12 cursor-pointer"
+          src={isDark ? LightLogo : DarkLogo}
+          alt="Streamify logo"
+          className="h-12 cursor-pointer transition-opacity duration-200"
           onClick={() => navigate("/")}
         />
       </div>
-      <div className="col-span-10 text-center  text-white">
+      <div className="col-span-10 text-center text-white dark:text-gray-900">
         <div className="relative flex justify-center w-1/2 mx-auto">
           {/* Input */}
           <input
@@ -92,12 +99,12 @@ export function Header() {
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
-            className="flex-1 p-2 px-4 rounded-l-3xl border-2 border-gray-400 bg-black text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
+            className="flex-1 p-2 px-4 rounded-l-3xl border-2 border-gray-400 dark:border-gray-300 bg-black dark:bg-gray-100 text-white dark:text-gray-900 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
           />
 
           {/* Button */}
           <button
-            className="p-2 px-4 rounded-r-3xl border-2 border-l-0 border-gray-400 bg-black text-white flex items-center justify-center focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
+            className="p-2 px-4 rounded-r-3xl border-2 border-l-0 border-gray-400 dark:border-gray-300 bg-black dark:bg-gray-100 text-white dark:text-gray-900 flex items-center justify-center focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
             onClick={() => {
               if (searchTerm.trim() !== "") {
                 navigate(`/results?search_query=${searchTerm}`);
@@ -109,11 +116,11 @@ export function Header() {
 
           {/* Suggestions Dropdown */}
           {showSuggestions && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-black border border-gray-700 rounded-lg shadow-lg z-10 text-left">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-black dark:bg-white border border-gray-700 dark:border-gray-300 rounded-lg shadow-lg z-10 text-left">
               {suggestions.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-center gap-2 hover:bg-gray-800 p-2 cursor-pointer"
+                  className="flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-gray-200 p-2 cursor-pointer text-white dark:text-gray-900"
                   onMouseDown={() => {
                     setSearchTerm(item); // Set input to clicked suggestion
                     setShowSuggestions(false);
@@ -128,11 +135,25 @@ export function Header() {
           )}
         </div>
       </div>
-      <div className=" col-span-1 ">
+      <div className="col-span-1 flex items-center gap-3 justify-end">
+        {/* Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200"
+          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {isDark ? (
+            <FaSun className="text-yellow-400 text-xl" />
+          ) : (
+            <FaMoon className="text-gray-300 text-xl" />
+          )}
+        </button>
+
+        {/* User Avatar */}
         <img
           src="https://us.123rf.com/450wm/tifani1/tifani11801/tifani1180100029/93019841-user-icon-vector-illustration-isolated-on-black.jpg?ver=6"
           alt="user"
-          className="h-14 ml-auto"
+          className="h-12 w-12 rounded-full"
         />
       </div>
     </div>

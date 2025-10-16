@@ -92,7 +92,7 @@ export function SideBar() {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="text-white  h-screen overflow-y-auto sticky top-0 shadow-lg my-2">
+    <div className="text-gray-900 dark:text-white bg-gray-200 dark:bg-black h-screen overflow-y-auto sticky top-0 shadow-lg my-2 transition-colors duration-200">
       {SIDEBAR_SECTIONS.map((section, idx) => (
         <div key={idx} className="px-4 py-3">
           {section.title && (
@@ -102,7 +102,7 @@ export function SideBar() {
             {section.items.map((item, i) => (
               <li
                 key={i}
-                className="flex items-center gap-3 cursor-pointer px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+                className="flex items-center gap-3 cursor-pointer px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors"
               >
                 {/* Render icon */}
                 <span className="text-lg">{item.icon}</span>

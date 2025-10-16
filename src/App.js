@@ -6,6 +6,7 @@ import { MainContainer } from "./components/body/mainContainer";
 import Watch from "./components/body/watch";
 import { SearchResults } from "./components/body/mainContainer/videos/SearchResults";
 import { Header } from "./components";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const AppLayout = () => {
   return (
@@ -45,7 +46,9 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <RouterProvider router={appRouter} />
+      <ThemeProvider>
+        <RouterProvider router={appRouter} />
+      </ThemeProvider>
     </Provider>
   );
 }

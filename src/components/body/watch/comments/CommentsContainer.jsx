@@ -23,8 +23,8 @@ export default function YouTubeCommentsContainer() {
   }
 
   return (
-    <div className="text-white mt-6 px-4">
-      <h2 className="text-xl font-semibold mb-4 border-b border-gray-700 pb-2">
+    <div className="text-gray-900 dark:text-white mt-4 px-4">
+      <h2 className="text-xl font-semibold mb-4 border-b border-gray-300 dark:border-gray-700 pb-2">
         Comments ({comments?.length || 0})
       </h2>
       <CommentList data={comments} />
