@@ -86,6 +86,28 @@ streamify/
 └── README.md
 ```
 
+## 🚀 List
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/1b238914-7523-4b9e-946d-cec8ab191da5" />
+
+## 🚀 Individual video playing
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/726bdd17-8d35-43ce-b75d-89203356c231" />
+
+## 🚀 Individual video - chat
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/49dd3254-36f5-4f7a-9ee0-bb919a792ecb" />
+
+## 🚀 Live - List 
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/5f6b927d-9aad-4ab5-89f0-f5646d7fa931" />
+
+## 🚀 Live - Playing
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/f5b73e19-ee5e-4ec9-81b5-7fc7110ca93e" />
+
+## 🚀 Live Chat 
+<img width="2056" height="1245" alt="image" src="https://github.com/user-attachments/assets/1c7822b9-5a02-44c1-9bd2-7da3b50447a6" />
+
+
+
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
