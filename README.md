@@ -7,6 +7,12 @@
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=for-the-badge&logo=YouTube&logoColor=white)
 
+## 🌐 Live Demo
+
+**[🚀 Try Streamify Live](https://streamify-rashmisubramani.vercel.app/)**
+
+Experience the full YouTube clone functionality with real-time video streaming, search, and interactive features.
+
 ## ✨ Features
 
 ### 🎥 **Core Video Experience**
