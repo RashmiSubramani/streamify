@@ -22,14 +22,24 @@ export function SearchResults() {
   }
 
   return (
-    <div className="flex flex-wrap text-white">
-      {videos
-        .filter((video) => video.id.kind === "youtube#video")
-        .map((video) => (
-          <Link to={`/watch?v=${video.id.videoId}`} key={video.id.videoId}>
-            <VideoCard info={video} />
-          </Link>
-        ))}
+    <div className="w-full">
+      {/* Search Results Grid - Responsive layout matching VideoContainer */}
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 p-4 bg-white dark:bg-black text-gray-900 dark:text-white w-full transition-colors duration-200">
+        {videos
+          ?.filter((video) => video.id.kind === "youtube#video")
+          .map((video) => (
+            <Link to={`/watch?v=${video.id.videoId}`} key={video.id.videoId}>
+              <VideoCard info={video} />
+            </Link>
+          ))}
+      </div>
+
+      {/* Empty state when no videos found */}
+      {(!videos || videos.length === 0) && (
+        <div className="text-center py-8 text-gray-400 dark:text-gray-600">
+          <p>No videos found for "{searchQuery}"</p>
+        </div>
+      )}
     </div>
   );
 }

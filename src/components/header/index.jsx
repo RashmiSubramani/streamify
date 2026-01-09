@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { FaSearch, FaSun, FaMoon } from "react-icons/fa";
+import { FaSearch, FaSun, FaMoon, FaTimes } from "react-icons/fa";
 import { cacheResults } from "../../utils/searchSlice";
 import { useNavigate } from "react-router-dom";
 import LightLogo from "../../images/lightLogo.png";
@@ -14,6 +14,7 @@ export function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -77,6 +78,25 @@ export function Header() {
     dispatch(cacheResults({ [searchTerm]: mockSuggestions }));
   }
 
+  const handleSearch = () => {
+    if (searchTerm.trim() !== "") {
+      navigate(`/results?search_query=${searchTerm}`);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
+    setSuggestions([]);
+    setShowSuggestions(false);
+  };
+
   return (
     <div className="grid grid-flow-col items-center p-2 m-2 shadow-red-500 shadow-lg bg-black dark:bg-white transition-colors duration-200">
       <div className="flex items-center  col-span-1 gap-2">
@@ -90,26 +110,47 @@ export function Header() {
       <div className="col-span-10 text-center text-white dark:text-gray-900">
         <div className="relative flex justify-center w-1/2 mx-auto">
           {/* Input */}
-          <input
-            id="search"
-            name="name"
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
-            className="flex-1 p-2 px-4 rounded-l-3xl border-2 border-gray-400 dark:border-gray-300 bg-black dark:bg-gray-100 text-white dark:text-gray-900 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
-          />
+          <div className="relative flex-1">
+            <input
+              id="search"
+              name="name"
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
+              onFocus={() => {
+                setShowSuggestions(true);
+                setIsInputFocused(true);
+              }}
+              onBlur={() => {
+                setShowSuggestions(false);
+                setIsInputFocused(false);
+              }}
+              className={`w-full p-2 px-4 pr-10 rounded-l-3xl border bg-black dark:bg-gray-100 text-white dark:text-gray-900 focus:outline-none transition-colors duration-200 ${
+                isInputFocused
+                  ? 'border-red-400 dark:border-red-400'
+                  : 'border-gray-400 dark:border-gray-300'
+              }`}
+            />
+            {searchTerm && (
+              <button
+                onClick={clearSearch}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 dark:hover:text-gray-600 transition-colors"
+              >
+                <FaTimes />
+              </button>
+            )}
+          </div>
 
           {/* Button */}
           <button
-            className="p-2 px-4 rounded-r-3xl border-2 border-l-0 border-gray-400 dark:border-gray-300 bg-black dark:bg-gray-100 text-white dark:text-gray-900 flex items-center justify-center focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition box-border"
-            onClick={() => {
-              if (searchTerm.trim() !== "") {
-                navigate(`/results?search_query=${searchTerm}`);
-              }
-            }}
+            className={`p-2 px-4 rounded-r-3xl border border-l-0 bg-black dark:bg-gray-100 text-white dark:text-gray-900 flex items-center justify-center focus:outline-none transition-colors duration-200 hover:bg-gray-900 dark:hover:bg-gray-200 ${
+              isInputFocused
+                ? 'border-red-400 dark:border-red-400'
+                : 'border-gray-400 dark:border-gray-300'
+            }`}
+            onClick={handleSearch}
           >
             <FaSearch className="text-gray-300" />
           </button>
